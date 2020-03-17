@@ -32,7 +32,7 @@ export const Card: React.FunctionComponent<ICardProps> = ({
   onClick,
   flipped
 }) => {
-  const [visible, setVisible] = React.useState(flipped);
+  const [visible, setVisible] = React.useState<boolean>();
   React.useEffect(() => {
     setVisible(flipped);
   }, [flipped]);

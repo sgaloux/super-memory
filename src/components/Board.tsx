@@ -1,8 +1,9 @@
 import * as React from "react";
-import { useAppLogicContext } from "../contexts/AppLogic";
 import styled from "styled-components";
 import { Button } from "./Button";
 import { Card } from "./Card";
+import { useDispatch, useSelector } from "react-redux";
+import { initialize, isInitialized, cards, flip } from "../store/gameReducer";
 export interface IBoardProps {}
 
 const Container = styled.div``;
@@ -18,24 +19,26 @@ const CardsContainer = styled.div`
 `;
 
 export const Board: React.FunctionComponent<IBoardProps> = props => {
-  const { initialize, flip, game, won, visibleCards } = useAppLogicContext();
+  const dispatch = useDispatch();
 
-  const initializeClicked = React.useCallback(() => {
-    initialize(32);
-  }, [initialize]);
+  const gameInitialized = useSelector(isInitialized);
+  const allCards = useSelector(cards);
 
   return (
     <Container>
       <h1>Memory Game</h1>
-      <Button text="initialize" onClick={initializeClicked}></Button>
+      <Button
+        text="initialize"
+        onClick={() => dispatch(initialize(32))}
+      ></Button>
       <CardsContainer>
-        {game.initialized &&
-          game.cards.map((card, position) => (
+        {gameInitialized &&
+          allCards.map(card => (
             <Card
+              key={card.position}
               card={card}
-              position={position}
-              onClick={flip}
-              flipped={visibleCards.includes(position)}
+              onClick={() => dispatch(flip(card.position))}
+              flipped={card.flipped}
             ></Card>
           ))}
       </CardsContainer>

@@ -1,11 +1,10 @@
 import * as React from "react";
-import { CardInfo } from "../contexts/reducer";
 import styled from "styled-components";
 import assets from "../assets";
+import { CardInfo } from "../store/gameReducer";
 
 export interface ICardProps {
   card: CardInfo;
-  position: number;
   flipped: boolean;
   onClick: (position: number) => void;
 }
@@ -30,7 +29,6 @@ const Container = styled.div<{ visible: boolean }>`
 
 export const Card: React.FunctionComponent<ICardProps> = ({
   card,
-  position,
   onClick,
   flipped
 }) => {
@@ -40,7 +38,13 @@ export const Card: React.FunctionComponent<ICardProps> = ({
   }, [flipped]);
 
   return (
-    <Container visible={visible} onClick={() => setVisible(true)}>
+    <Container
+      visible={visible}
+      onClick={() => {
+        setVisible(true);
+        setTimeout(() => onClick(card.position), 500);
+      }}
+    >
       {visible && card.image}
     </Container>
   );

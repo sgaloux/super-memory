@@ -1,12 +1,12 @@
 import React from "react";
-import { AppLogicProvider } from "./contexts/AppLogic";
+import { Provider } from "react-redux";
 import { Board } from "./components/Board";
-
+import store from "./store/store";
 function App() {
   return (
-    <AppLogicProvider>
+    <Provider store={store}>
       <Board></Board>
-    </AppLogicProvider>
+    </Provider>
   );
 }
 

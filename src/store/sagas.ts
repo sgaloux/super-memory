@@ -5,8 +5,10 @@ import {
   CardInfo,
   markError,
   hideCards,
+  initialize,
   gameSelectors
 } from "./gameReducer";
+import { showSuccess, showInfo } from "../components/NotificationToast";
 
 function* watchFlip() {
   yield takeEvery(showCard.type, function* onFlipActionTaken(
@@ -26,8 +28,14 @@ function* watchFlip() {
   });
 }
 
+function* watchInit() {
+  yield takeEvery(initialize.type, function onInitialize() {
+    showInfo("New game started");
+  });
+}
+
 const rootSaga = function*() {
-  yield all([fork(watchFlip)]);
+  yield all([fork(watchFlip), fork(watchInit)]);
 };
 
 export default rootSaga;

@@ -1,8 +1,7 @@
 import { RootState } from "./store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createSelector } from "@reduxjs/toolkit";
-
-export type gameSizes = 8 | 12 | 16 | 24 | 32 | 48 | 64;
+import { gameSizes, getBoard } from "./sizes";
 
 export type CardInfo = {
   image: string;
@@ -13,6 +12,7 @@ export type CardInfo = {
 };
 
 export type State = {
+  boardSize: gameSizes;
   selectedPosition: number | null;
   cards: CardInfo[];
   initialized: boolean;
@@ -20,6 +20,7 @@ export type State = {
 };
 
 export const initialState: State = {
+  boardSize: 24,
   cards: [],
   selectedPosition: null,
   initialized: false,
@@ -106,11 +107,13 @@ const visibleCards = createSelector(cards, cards =>
 );
 
 const nbFlips = createSelector(gameSelector, game => game.flips);
+const boardSize = createSelector(gameSelector, game => getBoard(game.boardSize));
 
 export const gameSelectors = {
   cards,
   isInitialized,
   flipAllowed,
   visibleCards,
-  nbFlips
+  nbFlips,
+  boardSize
 };

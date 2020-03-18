@@ -5,11 +5,16 @@ import { CardInfo } from "../store/gameReducer";
 
 export interface ICardProps {
   card: CardInfo;
-  flipped: boolean;
   onClick: (position: number) => void;
 }
 
-const Container = styled.div<{ visible: boolean }>`
+interface ContainerProps {
+  visible: boolean;
+  error?: boolean;
+  paired?: boolean;
+}
+
+const Container = styled.div<ContainerProps>`
   padding: 2rem;
   border: 1px solid black;
   border-radius: 10px;
@@ -17,35 +22,34 @@ const Container = styled.div<{ visible: boolean }>`
   height: 50px;
   display: flex;
   align-items: center;
+  font-size: 3rem;
   cursor: pointer;
   justify-content: center;
   background: ${props =>
     !props.visible ? `url(${assets.images.cardLogo})` : "white"};
+  border: 3px solid
+    ${props => (props.error ? "red" : props.paired ? "green" : "black")};
+
   &:hover {
-    color: blue;
-    background-color: red;
+    -moz-box-shadow: 0 0 10px #ccc;
+    -webkit-box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 0 10px #ccc;
+    border: 3px solid white;
   }
 `;
 
 export const Card: React.FunctionComponent<ICardProps> = ({
   card,
-  onClick,
-  flipped
+  onClick
 }) => {
-  const [visible, setVisible] = React.useState<boolean>();
-  React.useEffect(() => {
-    setVisible(flipped);
-  }, [flipped]);
-
   return (
     <Container
-      visible={visible}
-      onClick={() => {
-        setVisible(true);
-        setTimeout(() => onClick(card.position), 500);
-      }}
+      visible={card.visible}
+      error={card.error}
+      paired={card.paired}
+      onClick={() => onClick(card.position)}
     >
-      {visible && card.image}
+      {card.visible && card.image}
     </Container>
   );
 };

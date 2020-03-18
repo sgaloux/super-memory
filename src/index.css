@@ -1,7 +1,11 @@
-:root {
-  font: 600 18px "Open Sans", sans-serif;
+html,
+body {
+  height: 100%;
+  background: #b8d8e2;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-  background: #b8d8e2;
+#root {
+  height: 100%;
 }

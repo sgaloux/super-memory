@@ -18,11 +18,12 @@ const Container = styled.div<ContainerProps>`
   padding: 2rem;
   border: 1px solid black;
   border-radius: 10px;
-  width: 50px;
-  height: 50px;
+  width: 150px;
+  height: 150px;
   display: flex;
   align-items: center;
-  font-size: 3rem;
+  font-size: 5rem;
+  font-weight: bolder;
   cursor: pointer;
   justify-content: center;
   background: ${props =>
@@ -34,7 +35,6 @@ const Container = styled.div<ContainerProps>`
     -moz-box-shadow: 0 0 10px #ccc;
     -webkit-box-shadow: 0 0 10px #ccc;
     box-shadow: 0 0 10px #ccc;
-    border: 3px solid white;
   }
 `;
 

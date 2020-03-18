@@ -9,6 +9,7 @@ import {
   gameSelectors
 } from "./gameReducer";
 import { showSuccess, showInfo } from "../components/NotificationToast";
+import { IBoardSize } from "./sizes";
 
 function* watchFlip() {
   yield takeEvery(showCard.type, function* onFlipActionTaken(
@@ -29,8 +30,9 @@ function* watchFlip() {
 }
 
 function* watchInit() {
-  yield takeEvery(initialize.type, function onInitialize() {
-    showInfo("New game started");
+  yield takeEvery(initialize.type, function* onInitialize() {
+    const boardSize: IBoardSize = yield select(gameSelectors.boardSize);
+    showInfo(`New game started with ${boardSize.gameSize} cards`);
   });
 }
 

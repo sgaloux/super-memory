@@ -56,6 +56,7 @@ export const gameReducer = createSlice({
       state.selectedPosition = null;
       state.initialized = true;
       state.flips = 0;
+      state.boardSize = action.payload;
     },
     showCard(state, action: PayloadAction<number>) {
       if (flipIsAllowed(state.cards)) {
@@ -107,7 +108,9 @@ const visibleCards = createSelector(cards, cards =>
 );
 
 const nbFlips = createSelector(gameSelector, game => game.flips);
-const boardSize = createSelector(gameSelector, game => getBoard(game.boardSize));
+const boardSize = createSelector(gameSelector, game =>
+  getBoard(game.boardSize)
+);
 
 export const gameSelectors = {
   cards,

@@ -15,14 +15,12 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-  padding: 2rem;
   border: 1px solid black;
   border-radius: 10px;
-  width: 150px;
-  height: 150px;
   display: flex;
+  justify-self: stretch;
   align-items: center;
-  font-size: 5rem;
+  font-size: 2rem;
   font-weight: bolder;
   cursor: pointer;
   justify-content: center;

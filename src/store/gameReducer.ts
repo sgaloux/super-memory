@@ -2,7 +2,7 @@ import { RootState } from "./store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createSelector } from "@reduxjs/toolkit";
 
-export type gameSizes = 8 | 12 | 16 | 24 | 32 | 48;
+export type gameSizes = 8 | 12 | 16 | 24 | 32 | 48 | 64;
 
 export type CardInfo = {
   image: string;

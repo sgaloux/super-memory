@@ -29,7 +29,7 @@ export const Board: React.FunctionComponent<IBoardProps> = props => {
       <h1>Memory Game</h1>
       <Button
         text="initialize"
-        onClick={() => dispatch(initialize(8))}
+        onClick={() => dispatch(initialize(64))}
       ></Button>
       <h3>Flips : {flips}</h3>
       <CardsContainer>
